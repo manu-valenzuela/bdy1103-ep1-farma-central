@@ -5,9 +5,9 @@ Este es un trabajo grupal para el curso en cuestión.
 Este repositorio es un respaldo del trabajo realizado: las contribuciones de los integrantes no son rastreables de acuerdo al historial de este repositorio.
 
 ## INTEGRANTES
-Alberto Conejeros Conejeros
-Willy Rodríguez
-Manuel Valenzuela
+- Alberto Conejeros Conejeros
+- Willy Rodríguez
+- Manuel Valenzuela
 
 ## CONTENIDO
 ````
@@ -22,7 +22,8 @@ bdy1103-ep1-farma-central/
     └── 06_presentacion.pptx          : Diapositivas para acompañar la presentación de este código.
 ````
 ## INSTRUCCIONES
-  > Crear el usuario, de ser necesario, con 01_nuevo_usuario.sql.
-  > Crear las tablas con 02_tablas_farma_central.sql.
+  > Abrir SQLPlus, iniciar como `/as sysdba`, pegar el contenido de 01_nuevo_usuario.sql y crear el usuario.
+  > Crear una nueva conexión de nombre `farma_central` usando el usuario recién creado.    
+  > Abrir una `Hoja de trabajo de SQL` y crear las tablas con 02_tablas_farma_central.sql.
     > Insertar los datos en las tablas con 03_datos_farma_central.sql.
-  > Ejecutar los bloques de código, comprobando el cumplimiento de las reglas de negocio.
+  > Ejecutar los bloques de `04_inventario.sql`, comprobando el cumplimiento de las reglas de negocio. Apoyarse en los comentarios dentro del script para mayor     detalle.
