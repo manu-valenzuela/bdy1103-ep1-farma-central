@@ -1,0 +1,2 @@
+--FARMA CENTRAL
+--Inserción de datos para tablas
