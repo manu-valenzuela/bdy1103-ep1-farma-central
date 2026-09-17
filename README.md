@@ -1,6 +1,6 @@
-# bdy1103-ep1-farma-central
+# FARMA CENTRAL: bdy1103-ep1-farma-central
 
-Evaluación 1 de Taller de Base de Datos: Bloque PL/SQL para Farma-Central, una farmacia que necesita herramientas de control de inventario en su BDD.
+Evaluación 1 de Taller de Base de Datos: Bloque PL/SQL para Farma Central, una farmacia que necesita herramientas de control de inventario en su BDD.
 Este es un trabajo grupal para el curso en cuestión. 
 Este repositorio es un respaldo del trabajo realizado: las contribuciones de los integrantes no son rastreables de acuerdo al historial de este repositorio.
 
