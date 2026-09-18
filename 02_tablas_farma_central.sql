@@ -1,10 +1,10 @@
---tabla normalizando a: sucursal, cliente, empleado
+--Tabla 1: Region
 CREATE TABLE region (
     id_region NUMBER(2) PRIMARY KEY,
     nombre_region VARCHAR2(50) NOT NULL
 );
 
---tabla normalizando a: sucursal, cliente, empleado
+--Tabla 2: Comuna
 CREATE TABLE comuna (
     id_comuna NUMBER(4) PRIMARY KEY,
     nombre_comuna VARCHAR2(50) NOT NULL,
@@ -13,12 +13,13 @@ CREATE TABLE comuna (
         REFERENCES region(id_region)
 );
 
---tabla normalizando a: sucursal
+--Tabla 3: Tipo sucursal, farmacia o bodega.
 CREATE TABLE tipo_sucursal (
     id_tipo NUMBER(2) PRIMARY KEY,
     nombre_tipo VARCHAR2(20) NOT NULL
 );
 
+--Tabla 4: Sucursal, las sucursales de la cadena.
 CREATE TABLE sucursal (
     id_sucursal NUMBER(4) PRIMARY KEY,
     nombre VARCHAR2(50) NOT NULL,
@@ -34,12 +35,13 @@ CREATE TABLE sucursal (
         REFERENCES tipo_sucursal(id_tipo)
 );
 
---tabla normalizando a: empleado
+--Tabla 5: Cargo, cargos de un empleado.
 CREATE TABLE cargo (
     id_cargo NUMBER(3) PRIMARY KEY,
     nombre_cargo VARCHAR2(30) NOT NULL
 );
 
+--Tabla 6: Empleado, registro de empleados, asignados a una sucursal.
 CREATE TABLE empleado (
     id_empleado NUMBER(6) PRIMARY KEY,
     id_sucursal NUMBER(4) NOT NULL,
@@ -61,6 +63,7 @@ CREATE TABLE empleado (
         REFERENCES region(id_region)
 );
 
+--Tabla 7: Cliente, registra los clientes de las farmacias.
 CREATE TABLE cliente (
     id_cliente NUMBER(8) PRIMARY KEY,
     rut VARCHAR2(12) UNIQUE NOT NULL,
@@ -76,18 +79,19 @@ CREATE TABLE cliente (
         REFERENCES region(id_region)
 );
 
---tabla normalizando a: medicamento
+--Tabla 8: Categoria medicamento, son los tipos de medicamento.
 CREATE TABLE categoria_medicamento (
     id_categoria NUMBER(3) PRIMARY KEY,
     nombre_categoria VARCHAR2(40) NOT NULL
 );
 
---tabla normalizando a: medicamento
+--Tabla 9: Tipo receta, son las restricciones segun receta para los medicamentos.
 CREATE TABLE tipo_receta (
     id_tipo_receta NUMBER(2) PRIMARY KEY,
     descripcion VARCHAR2(20) NOT NULL
 );
 
+--Tabla 10: Medicamento, es el catalogo de medicamentos.
 CREATE TABLE medicamento (
     id_medicamento NUMBER(6) PRIMARY KEY,
     id_categoria NUMBER(3) NOT NULL,
@@ -100,6 +104,7 @@ CREATE TABLE medicamento (
         REFERENCES tipo_receta(id_tipo_receta)
 );
 
+--Tabla 11: Lote stock, es el inventario de las farmacias y bodegas.
 CREATE TABLE lote_stock (
     id_lote NUMBER(15) PRIMARY KEY,
     id_medicamento NUMBER(6) NOT NULL,
@@ -113,18 +118,24 @@ CREATE TABLE lote_stock (
         REFERENCES sucursal(id_sucursal)
 );
 
+
+--Tabla 12: Venta, registra una venta de medicamentos.
 CREATE TABLE venta (
     id_venta NUMBER(15) PRIMARY KEY,
     id_cliente NUMBER(8) NOT NULL,
     id_empleado NUMBER(6) NOT NULL,
+    id_sucursal NUMBER(4) NOT NULL,
     fecha DATE NOT NULL,
     total NUMBER(9) NOT NULL,
     CONSTRAINT fk_ven_cli FOREIGN KEY (id_cliente)
         REFERENCES cliente(id_cliente),
     CONSTRAINT fk_ven_emp FOREIGN KEY (id_empleado)
-        REFERENCES empleado(id_empleado)
+        REFERENCES empleado(id_empleado),
+    CONSTRAINT fk_ven_suc FOREIGN KEY (id_sucursal)
+        REFERENCES sucursal(id_sucursal)
 );
 
+--Tabla 13: Detalle venta, linea de detalle para una venta.
 CREATE TABLE detalle_venta (
     id_venta NUMBER(15) NOT NULL,
     id_lote VARCHAR2(20) NOT NULL,
@@ -137,12 +148,13 @@ CREATE TABLE detalle_venta (
         REFERENCES lote_stock(id_lote)
 );
 
---tabla normaliza a: envio_bodega
+--Tabla 14: Estado envio, tipos de status para un envio de bodega.
 CREATE TABLE estado_envio (
     id_estado NUMBER(2) PRIMARY KEY,
     descripcion VARCHAR2(20) NOT NULL
 );
 
+--Tabla 15: Envio bodega, contiene los envios de stock entre sucursales.
 CREATE TABLE envio_bodega (
     id_envio NUMBER(15) PRIMARY KEY,
     id_sucursal_origen NUMBER(4) NOT NULL,
@@ -157,8 +169,7 @@ CREATE TABLE envio_bodega (
         REFERENCES estado_envio(id_estado)
 );
 
---un envío necesita un detalle de lo enviado
-
+--Tabla 16: Detalle envio, contiene lineas de detalle para un envio desde bodega.
 CREATE TABLE detalle_envio (
     id_envio NUMBER(15) NOT NULL,
     id_lote VARCHAR2(20) NOT NULL,
@@ -171,7 +182,7 @@ CREATE TABLE detalle_envio (
         REFERENCES lote_stock(id_lote)
 );
 
---tabla alerta_inventario reemplaza a auditoria_alerta
+--Tabla 17: Alerta inventario, registra los inventarios bajos para informacion de bodega.
 CREATE TABLE alerta_inventario (
     id_alerta NUMBER(15) PRIMARY KEY,
     id_sucursal NUMBER(4),
