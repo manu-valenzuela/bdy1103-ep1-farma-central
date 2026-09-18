@@ -101,7 +101,7 @@ CREATE TABLE medicamento (
 );
 
 CREATE TABLE lote_stock (
-    id_lote VARCHAR2(20) PRIMARY KEY,
+    id_lote NUMBER(15) PRIMARY KEY,
     id_medicamento NUMBER(6) NOT NULL,
     id_sucursal NUMBER(4) NOT NULL,
     cantidad NUMBER(5) NOT NULL,
@@ -114,7 +114,7 @@ CREATE TABLE lote_stock (
 );
 
 CREATE TABLE venta (
-    id_venta NUMBER(10) PRIMARY KEY,
+    id_venta NUMBER(15) PRIMARY KEY,
     id_cliente NUMBER(8) NOT NULL,
     id_empleado NUMBER(6) NOT NULL,
     fecha DATE NOT NULL,
@@ -126,7 +126,7 @@ CREATE TABLE venta (
 );
 
 CREATE TABLE detalle_venta (
-    id_venta NUMBER(10) NOT NULL,
+    id_venta NUMBER(15) NOT NULL,
     id_lote VARCHAR2(20) NOT NULL,
     cantidad NUMBER(3) NOT NULL,
     subtotal NUMBER(9) NOT NULL,
@@ -144,7 +144,7 @@ CREATE TABLE estado_envio (
 );
 
 CREATE TABLE envio_bodega (
-    id_envio NUMBER(8) PRIMARY KEY,
+    id_envio NUMBER(15) PRIMARY KEY,
     id_sucursal_origen NUMBER(4) NOT NULL,
     id_sucursal_destino NUMBER(4) NOT NULL,
     fecha_envio DATE NOT NULL,
@@ -160,7 +160,7 @@ CREATE TABLE envio_bodega (
 --un envío necesita un detalle de lo enviado
 
 CREATE TABLE detalle_envio (
-    id_envio NUMBER(8) NOT NULL,
+    id_envio NUMBER(15) NOT NULL,
     id_lote VARCHAR2(20) NOT NULL,
     cantidad NUMBER(5) NOT NULL,
     observacion VARCHAR2(100),
@@ -172,8 +172,8 @@ CREATE TABLE detalle_envio (
 );
 
 --tabla alerta_inventario reemplaza a auditoria_alerta
-CREATE TABLE auditoria_alerta (
-    id_alerta NUMBER(10) PRIMARY KEY,
+CREATE TABLE alerta_inventario (
+    id_alerta NUMBER(15) PRIMARY KEY,
     id_sucursal NUMBER(4),
     mensaje VARCHAR2(100),
     fecha_registro DATE,
