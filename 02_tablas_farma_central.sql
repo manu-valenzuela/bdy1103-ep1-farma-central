@@ -138,7 +138,7 @@ CREATE TABLE venta (
 --Tabla 13: Detalle venta, linea de detalle para una venta.
 CREATE TABLE detalle_venta (
     id_venta NUMBER(15) NOT NULL,
-    id_lote VARCHAR2(20) NOT NULL,
+    id_lote NUMBER(15) NOT NULL,
     cantidad NUMBER(3) NOT NULL,
     subtotal NUMBER(9) NOT NULL,
     PRIMARY KEY (id_venta, id_lote),
@@ -172,7 +172,7 @@ CREATE TABLE envio_bodega (
 --Tabla 16: Detalle envio, contiene lineas de detalle para un envio desde bodega.
 CREATE TABLE detalle_envio (
     id_envio NUMBER(15) NOT NULL,
-    id_lote VARCHAR2(20) NOT NULL,
+    id_lote NUMBER(15) NOT NULL,
     cantidad NUMBER(5) NOT NULL,
     observacion VARCHAR2(100),
     PRIMARY KEY (id_envio, id_lote),

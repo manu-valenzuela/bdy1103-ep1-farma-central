@@ -1,341 +1,306 @@
--- FARMA CENTRAL
--- Datos de prueba corregidos y ampliados para Oracle.
---
--- Correcciones principales respecto de la versión anterior:
--- 1) Oracle no admite INSERT ... VALUES (...), (...); se usa INSERT ALL.
--- 2) Las fechas de ingreso siempre son anteriores a las fechas de vencimiento.
--- 3) Se generan datos para farmacias y bodegas, incluyendo lotes vigentes,
---    lotes vencidos, stock crítico, ventas, envíos y alertas.
--- 4) Los identificadores generados respetan las precisiones NUMBER definidas.
---
--- Ejecutar después de 02_tablas_farma_central.sql y una sola vez sobre un
--- esquema recién creado.
+--FARMA CENTRAL
+-- 1. REGION
+INSERT INTO region (id_region, nombre_region) VALUES (1, 'Arica y Parinacota');
+INSERT INTO region (id_region, nombre_region) VALUES (2, 'Tarapacá');
+INSERT INTO region (id_region, nombre_region) VALUES (3, 'Antofagasta');
+INSERT INTO region (id_region, nombre_region) VALUES (4, 'Atacama');
+INSERT INTO region (id_region, nombre_region) VALUES (5, 'Coquimbo');
+INSERT INTO region (id_region, nombre_region) VALUES (6, 'Valparaíso');
+INSERT INTO region (id_region, nombre_region) VALUES (7, 'Metropolitana de Santiago');
+INSERT INTO region (id_region, nombre_region) VALUES (8, 'O’Higgins');
+INSERT INTO region (id_region, nombre_region) VALUES (9, 'Maule');
+INSERT INTO region (id_region, nombre_region) VALUES (10, 'Ñuble');
+INSERT INTO region (id_region, nombre_region) VALUES (11, 'Biobío');
+INSERT INTO region (id_region, nombre_region) VALUES (12, 'Araucanía');
+INSERT INTO region (id_region, nombre_region) VALUES (13, 'Los Ríos');
+INSERT INTO region (id_region, nombre_region) VALUES (14, 'Los Lagos');
+INSERT INTO region (id_region, nombre_region) VALUES (15, 'Aysén');
+INSERT INTO region (id_region, nombre_region) VALUES (16, 'Magallanes');
 
--- Catálogos geográficos
-INSERT ALL
-  INTO region VALUES (1, 'Arica y Parinacota')
-  INTO region VALUES (2, 'Tarapacá')
-  INTO region VALUES (3, 'Antofagasta')
-  INTO region VALUES (4, 'Atacama')
-  INTO region VALUES (5, 'Coquimbo')
-  INTO region VALUES (6, 'Valparaíso')
-  INTO region VALUES (7, 'Metropolitana de Santiago')
-  INTO region VALUES (8, 'O’Higgins')
-  INTO region VALUES (9, 'Maule')
-  INTO region VALUES (10, 'Ñuble')
-  INTO region VALUES (11, 'Biobío')
-  INTO region VALUES (12, 'Araucanía')
-  INTO region VALUES (13, 'Los Ríos')
-  INTO region VALUES (14, 'Los Lagos')
-  INTO region VALUES (15, 'Aysén')
-  INTO region VALUES (16, 'Magallanes')
-SELECT 1 FROM dual;
+-- 2. COMUNA
+INSERT INTO comuna (id_comuna, nombre_comuna, id_region) VALUES (101, 'Arica', 1);
+INSERT INTO comuna (id_comuna, nombre_comuna, id_region) VALUES (102, 'Camarones', 1);
+INSERT INTO comuna (id_comuna, nombre_comuna, id_region) VALUES (103, 'Putre', 1);
+INSERT INTO comuna (id_comuna, nombre_comuna, id_region) VALUES (104, 'General Lagos', 1);
+INSERT INTO comuna (id_comuna, nombre_comuna, id_region) VALUES (201, 'Iquique', 2);
+INSERT INTO comuna (id_comuna, nombre_comuna, id_region) VALUES (202, 'Alto Hospicio', 2);
+INSERT INTO comuna (id_comuna, nombre_comuna, id_region) VALUES (203, 'Pozo Almonte', 2);
+INSERT INTO comuna (id_comuna, nombre_comuna, id_region) VALUES (204, 'Camiña', 2);
+INSERT INTO comuna (id_comuna, nombre_comuna, id_region) VALUES (205, 'Colchane', 2);
+INSERT INTO comuna (id_comuna, nombre_comuna, id_region) VALUES (206, 'Huara', 2);
+INSERT INTO comuna (id_comuna, nombre_comuna, id_region) VALUES (207, 'Pica', 2);
+INSERT INTO comuna (id_comuna, nombre_comuna, id_region) VALUES (301, 'Antofagasta', 3);
+INSERT INTO comuna (id_comuna, nombre_comuna, id_region) VALUES (302, 'Mejillones', 3);
+INSERT INTO comuna (id_comuna, nombre_comuna, id_region) VALUES (303, 'Sierra Gorda', 3);
+INSERT INTO comuna (id_comuna, nombre_comuna, id_region) VALUES (304, 'Taltal', 3);
+INSERT INTO comuna (id_comuna, nombre_comuna, id_region) VALUES (305, 'Calama', 3);
+INSERT INTO comuna (id_comuna, nombre_comuna, id_region) VALUES (306, 'Ollagüe', 3);
+INSERT INTO comuna (id_comuna, nombre_comuna, id_region) VALUES (307, 'San Pedro de Atacama', 3);
+INSERT INTO comuna (id_comuna, nombre_comuna, id_region) VALUES (401, 'Copiapó', 4);
+INSERT INTO comuna (id_comuna, nombre_comuna, id_region) VALUES (402, 'Caldera', 4);
+INSERT INTO comuna (id_comuna, nombre_comuna, id_region) VALUES (403, 'Tierra Amarilla', 4);
+INSERT INTO comuna (id_comuna, nombre_comuna, id_region) VALUES (404, 'Chañaral', 4);
+INSERT INTO comuna (id_comuna, nombre_comuna, id_region) VALUES (405, 'Diego de Almagro', 4);
+INSERT INTO comuna (id_comuna, nombre_comuna, id_region) VALUES (406, 'Vallenar', 4);
+INSERT INTO comuna (id_comuna, nombre_comuna, id_region) VALUES (407, 'Freirina', 4);
+INSERT INTO comuna (id_comuna, nombre_comuna, id_region) VALUES (408, 'Huasco', 4);
+INSERT INTO comuna (id_comuna, nombre_comuna, id_region) VALUES (409, 'Alto del Carmen', 4);
+INSERT INTO comuna (id_comuna, nombre_comuna, id_region) VALUES (701, 'Santiago', 7);
+INSERT INTO comuna (id_comuna, nombre_comuna, id_region) VALUES (702, 'Cerrillos', 7);
+INSERT INTO comuna (id_comuna, nombre_comuna, id_region) VALUES (703, 'Cerro Navia', 7);
+INSERT INTO comuna (id_comuna, nombre_comuna, id_region) VALUES (704, 'Conchalí', 7);
+INSERT INTO comuna (id_comuna, nombre_comuna, id_region) VALUES (705, 'El Bosque', 7);
+INSERT INTO comuna (id_comuna, nombre_comuna, id_region) VALUES (706, 'Estación Central', 7);
+INSERT INTO comuna (id_comuna, nombre_comuna, id_region) VALUES (707, 'Huechuraba', 7);
+INSERT INTO comuna (id_comuna, nombre_comuna, id_region) VALUES (708, 'Independencia', 7);
+INSERT INTO comuna (id_comuna, nombre_comuna, id_region) VALUES (709, 'La Cisterna', 7);
+INSERT INTO comuna (id_comuna, nombre_comuna, id_region) VALUES (710, 'La Florida', 7);
+INSERT INTO comuna (id_comuna, nombre_comuna, id_region) VALUES (711, 'La Granja', 7);
+INSERT INTO comuna (id_comuna, nombre_comuna, id_region) VALUES (712, 'La Pintana', 7);
+INSERT INTO comuna (id_comuna, nombre_comuna, id_region) VALUES (713, 'La Reina', 7);
+INSERT INTO comuna (id_comuna, nombre_comuna, id_region) VALUES (714, 'Las Condes', 7);
+INSERT INTO comuna (id_comuna, nombre_comuna, id_region) VALUES (715, 'Lo Barnechea', 7);
+INSERT INTO comuna (id_comuna, nombre_comuna, id_region) VALUES (716, 'Lo Espejo', 7);
+INSERT INTO comuna (id_comuna, nombre_comuna, id_region) VALUES (717, 'Lo Prado', 7);
+INSERT INTO comuna (id_comuna, nombre_comuna, id_region) VALUES (718, 'Macul', 7);
+INSERT INTO comuna (id_comuna, nombre_comuna, id_region) VALUES (719, 'Maipú', 7);
+INSERT INTO comuna (id_comuna, nombre_comuna, id_region) VALUES (720, 'Ñuñoa', 7);
+INSERT INTO comuna (id_comuna, nombre_comuna, id_region) VALUES (721, 'Pedro Aguirre Cerda', 7);
+INSERT INTO comuna (id_comuna, nombre_comuna, id_region) VALUES (722, 'Peñalolén', 7);
+INSERT INTO comuna (id_comuna, nombre_comuna, id_region) VALUES (723, 'Providencia', 7);
+INSERT INTO comuna (id_comuna, nombre_comuna, id_region) VALUES (724, 'Pudahuel', 7);
+INSERT INTO comuna (id_comuna, nombre_comuna, id_region) VALUES (725, 'Quilicura', 7);
+INSERT INTO comuna (id_comuna, nombre_comuna, id_region) VALUES (726, 'Quinta Normal', 7);
+INSERT INTO comuna (id_comuna, nombre_comuna, id_region) VALUES (727, 'Recoleta', 7);
+INSERT INTO comuna (id_comuna, nombre_comuna, id_region) VALUES (728, 'Renca', 7);
+INSERT INTO comuna (id_comuna, nombre_comuna, id_region) VALUES (729, 'San Joaquín', 7);
+INSERT INTO comuna (id_comuna, nombre_comuna, id_region) VALUES (730, 'San Miguel', 7);
+INSERT INTO comuna (id_comuna, nombre_comuna, id_region) VALUES (731, 'San Ramón', 7);
+INSERT INTO comuna (id_comuna, nombre_comuna, id_region) VALUES (732, 'Vitacura', 7);
+INSERT INTO comuna (id_comuna, nombre_comuna, id_region) VALUES (733, 'Puente Alto', 7);
+INSERT INTO comuna (id_comuna, nombre_comuna, id_region) VALUES (734, 'Pirque', 7);
+INSERT INTO comuna (id_comuna, nombre_comuna, id_region) VALUES (735, 'San José de Maipo', 7);
+INSERT INTO comuna (id_comuna, nombre_comuna, id_region) VALUES (736, 'Colina', 7);
+INSERT INTO comuna (id_comuna, nombre_comuna, id_region) VALUES (737, 'Lampa', 7);
+INSERT INTO comuna (id_comuna, nombre_comuna, id_region) VALUES (738, 'Tiltil', 7);
+INSERT INTO comuna (id_comuna, nombre_comuna, id_region) VALUES (739, 'San Bernardo', 7);
 
-INSERT ALL
-  INTO comuna VALUES (701, 'Santiago', 7)
-  INTO comuna VALUES (702, 'Cerrillos', 7)
-  INTO comuna VALUES (703, 'Cerro Navia', 7)
-  INTO comuna VALUES (704, 'Conchalí', 7)
-  INTO comuna VALUES (705, 'El Bosque', 7)
-  INTO comuna VALUES (706, 'Estación Central', 7)
-  INTO comuna VALUES (707, 'Huechuraba', 7)
-  INTO comuna VALUES (708, 'Independencia', 7)
-  INTO comuna VALUES (709, 'La Cisterna', 7)
-  INTO comuna VALUES (710, 'La Florida', 7)
-  INTO comuna VALUES (711, 'La Granja', 7)
-  INTO comuna VALUES (712, 'La Pintana', 7)
-  INTO comuna VALUES (713, 'La Reina', 7)
-  INTO comuna VALUES (714, 'Las Condes', 7)
-  INTO comuna VALUES (715, 'Lo Barnechea', 7)
-  INTO comuna VALUES (716, 'Lo Espejo', 7)
-  INTO comuna VALUES (717, 'Lo Prado', 7)
-  INTO comuna VALUES (718, 'Macul', 7)
-  INTO comuna VALUES (719, 'Maipú', 7)
-  INTO comuna VALUES (720, 'Ñuñoa', 7)
-  INTO comuna VALUES (721, 'Pedro Aguirre Cerda', 7)
-  INTO comuna VALUES (722, 'Peñalolén', 7)
-  INTO comuna VALUES (723, 'Providencia', 7)
-  INTO comuna VALUES (724, 'Pudahuel', 7)
-  INTO comuna VALUES (725, 'Quilicura', 7)
-  INTO comuna VALUES (726, 'Quinta Normal', 7)
-  INTO comuna VALUES (727, 'Recoleta', 7)
-  INTO comuna VALUES (728, 'Renca', 7)
-  INTO comuna VALUES (729, 'San Joaquín', 7)
-  INTO comuna VALUES (730, 'San Miguel', 7)
-  INTO comuna VALUES (731, 'San Ramón', 7)
-  INTO comuna VALUES (732, 'Vitacura', 7)
-  INTO comuna VALUES (733, 'Puente Alto', 7)
-  INTO comuna VALUES (734, 'Pirque', 7)
-  INTO comuna VALUES (735, 'San José de Maipo', 7)
-  INTO comuna VALUES (736, 'Colina', 7)
-  INTO comuna VALUES (737, 'Lampa', 7)
-  INTO comuna VALUES (738, 'Tiltil', 7)
-  INTO comuna VALUES (739, 'San Bernardo', 7)
-  INTO comuna VALUES (740, 'Buin', 7)
-  INTO comuna VALUES (741, 'Calera de Tango', 7)
-  INTO comuna VALUES (742, 'Paine', 7)
-SELECT 1 FROM dual;
+-- 3. TIPO SUCURSAL
+INSERT INTO tipo_sucursal (id_tipo, nombre_tipo) VALUES (1, 'Farmacia');
+INSERT INTO tipo_sucursal (id_tipo, nombre_tipo) VALUES (2, 'Bodega');
 
-INSERT ALL
-  INTO tipo_sucursal VALUES (1, 'Farmacia')
-  INTO tipo_sucursal VALUES (2, 'Bodega')
-SELECT 1 FROM dual;
+-- 4. SUCURSAL (Comunas corregidas según correspondencia con id_comuna)
+INSERT INTO sucursal (id_sucursal, nombre, calle, id_comuna, id_region, id_tipo) VALUES (1001, 'Farmacia Central Santiago', 'Av. Libertador Bernardo O’Higgins 1234', 701, 7, 1);
+INSERT INTO sucursal (id_sucursal, nombre, calle, id_comuna, id_region, id_tipo) VALUES (1002, 'Farmacia Providencia', 'Av. Providencia 1456', 723, 7, 1);
+INSERT INTO sucursal (id_sucursal, nombre, calle, id_comuna, id_region, id_tipo) VALUES (1003, 'Farmacia Peñalolén', 'Av. Grecia 5678', 722, 7, 1);
+INSERT INTO sucursal (id_sucursal, nombre, calle, id_comuna, id_region, id_tipo) VALUES (1004, 'Farmacia Ñuñoa', 'Av. Irarrázaval 2233', 720, 7, 1);
+INSERT INTO sucursal (id_sucursal, nombre, calle, id_comuna, id_region, id_tipo) VALUES (1005, 'Farmacia La Florida', 'Av. Vicuña Mackenna 8900', 710, 7, 1);
+INSERT INTO sucursal (id_sucursal, nombre, calle, id_comuna, id_region, id_tipo) VALUES (1006, 'Farmacia Maipú', 'Av. Pajaritos 4567', 719, 7, 1);
+INSERT INTO sucursal (id_sucursal, nombre, calle, id_comuna, id_region, id_tipo) VALUES (1007, 'Farmacia Las Condes', 'Av. Apoquindo 7654', 714, 7, 1);
+INSERT INTO sucursal (id_sucursal, nombre, calle, id_comuna, id_region, id_tipo) VALUES (1008, 'Farmacia San Bernardo', 'Av. Portales 234', 739, 7, 1);
+INSERT INTO sucursal (id_sucursal, nombre, calle, id_comuna, id_region, id_tipo) VALUES (2001, 'Bodega Central Nos', 'Camino a Nos 345', 739, 7, 2);
+INSERT INTO sucursal (id_sucursal, nombre, calle, id_comuna, id_region, id_tipo) VALUES (2002, 'Bodega Oriente', 'Av. Américo Vespucio 789', 710, 7, 2);
 
-INSERT ALL
-  INTO sucursal VALUES (1001, 'Farmacia Central Santiago', 'Av. Libertador Bernardo O’Higgins 1234', 701, 7, 1)
-  INTO sucursal VALUES (1002, 'Farmacia Providencia', 'Av. Providencia 1456', 723, 7, 1)
-  INTO sucursal VALUES (1003, 'Farmacia Peñalolén', 'Av. Grecia 5678', 722, 7, 1)
-  INTO sucursal VALUES (1004, 'Farmacia Ñuñoa', 'Av. Irarrázaval 2233', 720, 7, 1)
-  INTO sucursal VALUES (1005, 'Farmacia La Florida', 'Av. Vicuña Mackenna 8900', 710, 7, 1)
-  INTO sucursal VALUES (1006, 'Farmacia Maipú', 'Av. Pajaritos 4567', 719, 7, 1)
-  INTO sucursal VALUES (1007, 'Farmacia Las Condes', 'Av. Apoquindo 7654', 714, 7, 1)
-  INTO sucursal VALUES (1008, 'Farmacia San Bernardo', 'Av. Portales 234', 739, 7, 1)
-  INTO sucursal VALUES (2001, 'Bodega Central Nos', 'Camino a Nos 345', 739, 7, 2)
-  INTO sucursal VALUES (2002, 'Bodega Oriente', 'Av. Américo Vespucio 789', 705, 7, 2)
-SELECT 1 FROM dual;
+-- 5. CARGO
+INSERT INTO cargo (id_cargo, nombre_cargo) VALUES (1, 'Farmacéutico');
+INSERT INTO cargo (id_cargo, nombre_cargo) VALUES (2, 'Químico Farmacéutico');
+INSERT INTO cargo (id_cargo, nombre_cargo) VALUES (3, 'Auxiliar de Farmacia');
+INSERT INTO cargo (id_cargo, nombre_cargo) VALUES (4, 'Cajero');
+INSERT INTO cargo (id_cargo, nombre_cargo) VALUES (5, 'Administrador de Sucursal');
+INSERT INTO cargo (id_cargo, nombre_cargo) VALUES (6, 'Bodeguero');
+INSERT INTO cargo (id_cargo, nombre_cargo) VALUES (7, 'Encargado de Inventario');
+INSERT INTO cargo (id_cargo, nombre_cargo) VALUES (8, 'Repartidor');
 
-INSERT ALL
-  INTO cargo VALUES (1, 'Farmacéutico')
-  INTO cargo VALUES (2, 'Químico Farmacéutico')
-  INTO cargo VALUES (3, 'Auxiliar de Farmacia')
-  INTO cargo VALUES (4, 'Cajero')
-  INTO cargo VALUES (5, 'Administrador de Sucursal')
-  INTO cargo VALUES (6, 'Bodeguero')
-  INTO cargo VALUES (7, 'Encargado de Inventario')
-  INTO cargo VALUES (8, 'Repartidor')
-SELECT 1 FROM dual;
+-- 6. EMPLEADO
+INSERT INTO empleado VALUES (6001,1001,'21.111.111-1','Carlos','Pérez',1,'Av. Libertador 1234',701,7,'912345001');
+INSERT INTO empleado VALUES (6002,1001,'21.111.111-2','María','González',3,'Av. Libertador 1240',701,7,'912345002');
+INSERT INTO empleado VALUES (6003,1001,'21.111.111-3','Juan','Ramírez',4,'Av. Libertador 1250',701,7,'912345003');
+INSERT INTO empleado VALUES (6004,1002,'22.111.111-1','Sofía','Martínez',1,'Av. Providencia 1456',723,7,'913456001');
+INSERT INTO empleado VALUES (6005,1002,'22.111.111-2','Diego','Fernández',3,'Av. Providencia 1460',723,7,'913456002');
+INSERT INTO empleado VALUES (6006,1002,'22.111.111-3','Valentina','Rojas',4,'Av. Providencia 1470',723,7,'913456003');
+INSERT INTO empleado VALUES (6007,1003,'23.111.111-1','Felipe','Silva',1,'Av. Grecia 5678',722,7,'914567001');
+INSERT INTO empleado VALUES (6008,1003,'23.111.111-2','Daniela','Reyes',3,'Av. Grecia 5680',722,7,'914567002');
+INSERT INTO empleado VALUES (6009,1003,'23.111.111-3','Matías','Herrera',4,'Av. Grecia 5690',722,7,'914567003');
+INSERT INTO empleado VALUES (6010,1004,'24.111.111-1','Paula','Cortés',1,'Av. Irarrázaval 2233',720,7,'915678001');
+INSERT INTO empleado VALUES (6011,1004,'24.111.111-2','Rodrigo','Fuentes',3,'Av. Irarrázaval 2240',720,7,'915678002');
+INSERT INTO empleado VALUES (6012,1004,'24.111.111-3','Isabel','Mendoza',4,'Av. Irarrázaval 2250',720,7,'915678003');
+INSERT INTO empleado VALUES (6013,1005,'25.111.111-1','Gabriel','Araya',1,'Av. Vicuña Mackenna 8900',710,7,'916789001');
+INSERT INTO empleado VALUES (6014,1005,'25.111.111-2','Fernanda','Carrasco',3,'Av. Vicuña Mackenna 8910',710,7,'916789002');
+INSERT INTO empleado VALUES (6015,1005,'25.111.111-3','Sebastián','Bravo',4,'Av. Vicuña Mackenna 8920',710,7,'916789003');
+INSERT INTO empleado VALUES (6016,1006,'26.111.111-1','Ignacio','Campos',1,'Av. Pajaritos 4567',719,7,'917890001');
+INSERT INTO empleado VALUES (6017,1006,'26.111.111-2','Josefa','Aguilar',3,'Av. Pajaritos 4570',719,7,'917890002');
+INSERT INTO empleado VALUES (6018,1006,'26.111.111-3','Mauricio','Espinoza',4,'Av. Pajaritos 4580',719,7,'917890003');
+INSERT INTO empleado VALUES (6019,1007,'27.111.111-1','Patricia','Valenzuela',1,'Av. Apoquindo 7654',714,7,'918901001');
+INSERT INTO empleado VALUES (6020,1007,'27.111.111-2','Cristina','Aravena',3,'Av. Apoquindo 7660',714,7,'918901002');
+INSERT INTO empleado VALUES (6021,1007,'27.111.111-3','Felipe','Bustamante',4,'Av. Apoquindo 7670',714,7,'918901003');
+INSERT INTO empleado VALUES (6022,1008,'28.111.111-1','Andrea','Silva',1,'Av. Portales 234',739,7,'919012001');
+INSERT INTO empleado VALUES (6023,1008,'28.111.111-2','Rodrigo','Tapia',3,'Av. Portales 240',739,7,'919012002');
+INSERT INTO empleado VALUES (6024,1008,'28.111.111-3','Marcela','Figueroa',4,'Av. Portales 250',739,7,'919012003');
+INSERT INTO empleado VALUES (6025,2001,'29.111.111-1','Luis','Moreno',6,'Camino a Nos 345',739,7,'920123001');
+INSERT INTO empleado VALUES (6026,2001,'29.111.111-2','Carolina','Fuenzalida',7,'Camino a Nos 350',739,7,'920123002');
+INSERT INTO empleado VALUES (6027,2001,'29.111.111-3','Miguel','Arriagada',8,'Camino a Nos 360',739,7,'920123003');
+INSERT INTO empleado VALUES (6028,2002,'30.111.111-1','Claudio','Poblete',6,'Av. Américo Vespucio 789',710,7,'921234001');
+INSERT INTO empleado VALUES (6029,2002,'30.111.111-2','Verónica','Sandoval',7,'Av. Américo Vespucio 790',710,7,'921234002');
+INSERT INTO empleado VALUES (6030,2002,'30.111.111-3','Esteban','Riquelme',8,'Av. Américo Vespucio 791',710,7,'921234003');
 
-INSERT ALL
-  INTO categoria_medicamento VALUES (1, 'Antibióticos')
-  INTO categoria_medicamento VALUES (2, 'Analgésicos')
-  INTO categoria_medicamento VALUES (3, 'Antiinflamatorios')
-  INTO categoria_medicamento VALUES (4, 'Antihistamínicos')
-  INTO categoria_medicamento VALUES (5, 'Antipiréticos')
-  INTO categoria_medicamento VALUES (6, 'Anticonceptivos')
-  INTO categoria_medicamento VALUES (7, 'Vitaminas y Suplementos')
-  INTO categoria_medicamento VALUES (8, 'Antidepresivos')
-  INTO categoria_medicamento VALUES (9, 'Antihipertensivos')
-  INTO categoria_medicamento VALUES (10, 'Antidiabéticos')
-  INTO categoria_medicamento VALUES (11, 'Antifúngicos')
-  INTO categoria_medicamento VALUES (12, 'Antivirales')
-  INTO categoria_medicamento VALUES (13, 'Productos Oftálmicos')
-  INTO categoria_medicamento VALUES (14, 'Productos Dermatológicos')
-  INTO categoria_medicamento VALUES (15, 'Productos Gastrointestinales')
-  INTO categoria_medicamento VALUES (16, 'Productos Respiratorios')
-  INTO categoria_medicamento VALUES (17, 'Vacunas')
-  INTO categoria_medicamento VALUES (18, 'Homeopáticos y Naturales')
-  INTO categoria_medicamento VALUES (19, 'Productos Pediátricos')
-  INTO categoria_medicamento VALUES (20, 'Productos Geriátricos')
-SELECT 1 FROM dual;
+-- 7. CLIENTE
+INSERT INTO cliente VALUES (7001,'31.111.111-1','Alejandro','Pérez','Av. Libertador 2000',701,7,'931111111');
+INSERT INTO cliente VALUES (7002,'31.111.111-2','Beatriz','González','Av. Providencia 3000',723,7,'932222222');
+INSERT INTO cliente VALUES (7003,'31.111.111-3','Claudio','Ramírez','Av. Grecia 4000',722,7,'933333333');
+INSERT INTO cliente VALUES (7004,'31.111.111-4','Daniela','Torres','Av. Irarrázaval 5000',720,7,'934444444');
+INSERT INTO cliente VALUES (7005,'31.111.111-5','Eduardo','López','Av. Vicuña Mackenna 6000',710,7,'935555555');
+INSERT INTO cliente VALUES (7006,'31.111.111-6','Fernanda','Martínez','Av. Pajaritos 7000',719,7,'936666666');
+INSERT INTO cliente VALUES (7007,'31.111.111-7','Gustavo','Silva','Av. Apoquindo 8000',714,7,'937777777');
+INSERT INTO cliente VALUES (7008,'31.111.111-8','Helena','Morales','Av. Portales 9000',739,7,'938888888');
+INSERT INTO cliente VALUES (7009,'31.111.111-9','Ignacio','Rojas','Av. Américo Vespucio 1000',710,7,'939999999');
+INSERT INTO cliente VALUES (7010,'31.111.111-0','Josefa','Castro','Av. La Florida 1100',710,7,'930000000');
 
-INSERT ALL
-  INTO tipo_receta VALUES (1, 'Venta libre')
-  INTO tipo_receta VALUES (2, 'Receta médica')
-  INTO tipo_receta VALUES (3, 'Receta retenida')
-SELECT 1 FROM dual;
+-- 8. CATEGORIA MEDICAMENTO
+INSERT INTO categoria_medicamento VALUES (1, 'Antibióticos');
+INSERT INTO categoria_medicamento VALUES (2, 'Analgésicos');
+INSERT INTO categoria_medicamento VALUES (3, 'Antiinflamatorios');
+INSERT INTO categoria_medicamento VALUES (4, 'Antihistamínicos');
+INSERT INTO categoria_medicamento VALUES (5, 'Antipiréticos');
+INSERT INTO categoria_medicamento VALUES (6, 'Anticonceptivos');
+INSERT INTO categoria_medicamento VALUES (7, 'Vitaminas y Suplementos');
+INSERT INTO categoria_medicamento VALUES (8, 'Antidepresivos');
+INSERT INTO categoria_medicamento VALUES (9, 'Antihipertensivos');
+INSERT INTO categoria_medicamento VALUES (10, 'Antidiabéticos');
+INSERT INTO categoria_medicamento VALUES (11, 'Antifúngicos');
+INSERT INTO categoria_medicamento VALUES (12, 'Antivirales');
+INSERT INTO categoria_medicamento VALUES (13, 'Productos Oftálmicos');
+INSERT INTO categoria_medicamento VALUES (14, 'Productos Dermatológicos');
+INSERT INTO categoria_medicamento VALUES (15, 'Productos Gastrointestinales');
+INSERT INTO categoria_medicamento VALUES (16, 'Productos Respiratorios');
+INSERT INTO categoria_medicamento VALUES (17, 'Vacunas');
+INSERT INTO categoria_medicamento VALUES (18, 'Homeopáticos y Naturales');
+INSERT INTO categoria_medicamento VALUES (19, 'Productos Pediátricos');
+INSERT INTO categoria_medicamento VALUES (20, 'Productos Geriátricos');
 
--- Catálogo de medicamentos
-INSERT ALL
-  INTO medicamento VALUES (100001, 2, 'Paracetamol 500mg', 1, 1200)
-  INTO medicamento VALUES (100002, 2, 'Ibuprofeno 400mg', 1, 1500)
-  INTO medicamento VALUES (100003, 2, 'Aspirina 100mg', 1, 1000)
-  INTO medicamento VALUES (100004, 2, 'Naproxeno 250mg', 1, 1800)
-  INTO medicamento VALUES (100005, 1, 'Amoxicilina 500mg', 3, 3500)
-  INTO medicamento VALUES (100006, 1, 'Ciprofloxacino 500mg', 3, 4200)
-  INTO medicamento VALUES (100007, 1, 'Azitromicina 500mg', 3, 4000)
-  INTO medicamento VALUES (100008, 1, 'Cefalexina 500mg', 3, 3800)
-  INTO medicamento VALUES (100009, 3, 'Diclofenaco 50mg', 2, 2500)
-  INTO medicamento VALUES (100010, 3, 'Ketorolaco 10mg', 2, 2800)
-  INTO medicamento VALUES (100011, 3, 'Prednisona 5mg', 2, 3000)
-  INTO medicamento VALUES (100012, 3, 'Meloxicam 15mg', 2, 3200)
-  INTO medicamento VALUES (100013, 4, 'Loratadina 10mg', 1, 2200)
-  INTO medicamento VALUES (100014, 4, 'Cetirizina 10mg', 1, 2300)
-  INTO medicamento VALUES (100015, 4, 'Fexofenadina 120mg', 1, 2600)
-  INTO medicamento VALUES (100016, 4, 'Clorfenamina 4mg', 1, 1500)
-  INTO medicamento VALUES (100017, 5, 'Metamizol 500mg', 1, 2000)
-  INTO medicamento VALUES (100018, 5, 'Ibuprofeno suspensión pediátrica', 1, 1800)
-  INTO medicamento VALUES (100019, 5, 'Paracetamol suspensión pediátrica', 1, 1700)
-  INTO medicamento VALUES (100020, 5, 'Ácido acetilsalicílico 500mg', 1, 1600)
-  INTO medicamento VALUES (100021, 7, 'Vitamina C 1g', 1, 2500)
-  INTO medicamento VALUES (100022, 7, 'Multivitamínico adulto', 1, 3500)
-  INTO medicamento VALUES (100023, 7, 'Hierro 325mg', 1, 2800)
-  INTO medicamento VALUES (100024, 7, 'Vitamina D 2000UI', 1, 3000)
-  INTO medicamento VALUES (100025, 9, 'Losartán 50mg', 2, 3200)
-  INTO medicamento VALUES (100026, 9, 'Enalapril 10mg', 2, 3100)
-  INTO medicamento VALUES (100027, 9, 'Amlodipino 5mg', 2, 3300)
-  INTO medicamento VALUES (100028, 9, 'Propranolol 40mg', 2, 2900)
-  INTO medicamento VALUES (100029, 10, 'Metformina 850mg', 2, 2800)
-  INTO medicamento VALUES (100030, 10, 'Glibenclamida 5mg', 2, 2700)
-  INTO medicamento VALUES (100031, 10, 'Insulina NPH 100UI/ml', 2, 8500)
-  INTO medicamento VALUES (100032, 10, 'Insulina Glargina 100UI/ml', 2, 12000)
-  INTO medicamento VALUES (100033, 11, 'Fluconazol 150mg', 2, 3500)
-  INTO medicamento VALUES (100034, 11, 'Itraconazol 100mg', 2, 4200)
-  INTO medicamento VALUES (100035, 11, 'Ketoconazol 200mg', 2, 3800)
-  INTO medicamento VALUES (100036, 11, 'Clotrimazol crema 1%', 2, 2500)
-  INTO medicamento VALUES (100037, 12, 'Aciclovir 400mg', 2, 3600)
-  INTO medicamento VALUES (100038, 12, 'Oseltamivir 75mg', 2, 9500)
-  INTO medicamento VALUES (100039, 12, 'Valaciclovir 500mg', 2, 4800)
-  INTO medicamento VALUES (100040, 12, 'Zidovudina 300mg', 2, 5200)
-SELECT 1 FROM dual;
+-- 9. TIPO RECETA
+INSERT INTO tipo_receta VALUES (1, 'Venta libre');
+INSERT INTO tipo_receta VALUES (2, 'Receta médica');
+INSERT INTO tipo_receta VALUES (3, 'Receta retenida');
 
--- Empleados: tres por sucursal, 30 registros.
-BEGIN
-  FOR s IN 1..8 LOOP
-    INSERT INTO empleado VALUES
-      (600000 + (s - 1) * 3 + 1, 1000 + s,
-       '2' || TO_CHAR(10000000 + s * 100 + 1) || '-' || TO_CHAR(MOD(s, 10)),
-       'Empleado', 'Farmacia' || s, 1, 'Calle Principal ' || s,
-       700 + s, 7, '9120000' || LPAD(s, 2, '0'));
-    INSERT INTO empleado VALUES
-      (600000 + (s - 1) * 3 + 2, 1000 + s,
-       '2' || TO_CHAR(11000000 + s * 100 + 2) || '-' || TO_CHAR(MOD(s + 1, 10)),
-       'Auxiliar', 'Farmacia' || s, 3, 'Calle Principal ' || s,
-       700 + s, 7, '9130000' || LPAD(s, 2, '0'));
-    INSERT INTO empleado VALUES
-      (600000 + (s - 1) * 3 + 3, 1000 + s,
-       '2' || TO_CHAR(12000000 + s * 100 + 3) || '-' || TO_CHAR(MOD(s + 2, 10)),
-       'Cajero', 'Farmacia' || s, 4, 'Calle Principal ' || s,
-       700 + s, 7, '9140000' || LPAD(s, 2, '0'));
-  END LOOP;
+-- 10. MEDICAMENTO
+INSERT INTO medicamento VALUES (100001,2,'Paracetamol 500mg',1,1200);
+INSERT INTO medicamento VALUES (100002,2,'Ibuprofeno 400mg',1,1500);
+INSERT INTO medicamento VALUES (100003,2,'Aspirina 100mg',1,1000);
+INSERT INTO medicamento VALUES (100004,2,'Naproxeno 250mg',1,1800);
+INSERT INTO medicamento VALUES (100005,1,'Amoxicilina 500mg',3,3500);
+INSERT INTO medicamento VALUES (100006,1,'Ciprofloxacino 500mg',3,4200);
+INSERT INTO medicamento VALUES (100007,1,'Azitromicina 500mg',3,4000);
+INSERT INTO medicamento VALUES (100008,1,'Cefalexina 500mg',3,3800);
+INSERT INTO medicamento VALUES (100009,3,'Diclofenaco 50mg',2,2500);
+INSERT INTO medicamento VALUES (100010,3,'Ketorolaco 10mg',2,2800);
+INSERT INTO medicamento VALUES (100011,3,'Prednisona 5mg',2,3000);
+INSERT INTO medicamento VALUES (100012,3,'Meloxicam 15mg',2,3200);
+INSERT INTO medicamento VALUES (100013,4,'Loratadina 10mg',1,2200);
+INSERT INTO medicamento VALUES (100014,4,'Cetirizina 10mg',1,2300);
+INSERT INTO medicamento VALUES (100015,4,'Fexofenadina 120mg',1,2600);
+INSERT INTO medicamento VALUES (100016,4,'Clorfenamina 4mg',1,1500);
+INSERT INTO medicamento VALUES (100017,5,'Metamizol 500mg',1,2000);
+INSERT INTO medicamento VALUES (100018,5,'Ibuprofeno suspensión pediátrica',1,1800);
+INSERT INTO medicamento VALUES (100019,5,'Paracetamol suspensión pediátrica',1,1700);
+INSERT INTO medicamento VALUES (100020,5,'Ácido acetilsalicílico 500mg',1,1600);
+INSERT INTO medicamento VALUES (100021,7,'Vitamina C 1g',1,2500);
+INSERT INTO medicamento VALUES (100022,7,'Multivitamínico adulto',1,3500);
+INSERT INTO medicamento VALUES (100023,7,'Hierro 325mg',1,2800);
+INSERT INTO medicamento VALUES (100024,7,'Vitamina D 2000UI',1,3000);
+INSERT INTO medicamento VALUES (100025,9,'Losartán 50mg',2,3200);
+INSERT INTO medicamento VALUES (100026,9,'Enalapril 10mg',2,3100);
+INSERT INTO medicamento VALUES (100027,9,'Amlodipino 5mg',2,3300);
+INSERT INTO medicamento VALUES (100028,9,'Propranolol 40mg',2,2900);
+INSERT INTO medicamento VALUES (100029,10,'Metformina 850mg',2,2800);
+INSERT INTO medicamento VALUES (100030,10,'Glibenclamida 5mg',2,2700);
+INSERT INTO medicamento VALUES (100031,10,'Insulina NPH 100UI/ml',2,8500);
+INSERT INTO medicamento VALUES (100032,10,'Insulina Glargina 100UI/ml',2,12000);
+INSERT INTO medicamento VALUES (100033,11,'Fluconazol 150mg',2,3500);
+INSERT INTO medicamento VALUES (100034,11,'Itraconazol 100mg',2,4200);
+INSERT INTO medicamento VALUES (100035,11,'Ketoconazol 200mg',2,3800);
+INSERT INTO medicamento VALUES (100036,11,'Clotrimazol crema 1%',2,2500);
+INSERT INTO medicamento VALUES (100037,12,'Aciclovir 400mg',2,3600);
+INSERT INTO medicamento VALUES (100038,12,'Oseltamivir 75mg',2,9500);
+INSERT INTO medicamento VALUES (100039,12,'Valaciclovir 500mg',2,4800);
+INSERT INTO medicamento VALUES (100040,12,'Zidovudina 300mg',2,5200);
 
-  INSERT INTO empleado VALUES
-    (600025, 2001, '29100001-1', 'Luis', 'Bodeguero', 6,
-     'Camino a Nos 345', 739, 7, '920123001');
-  INSERT INTO empleado VALUES
-    (600026, 2001, '29100002-2', 'Carolina', 'Inventario', 7,
-     'Camino a Nos 350', 739, 7, '920123002');
-  INSERT INTO empleado VALUES
-    (600027, 2001, '29100003-3', 'Miguel', 'Repartos', 8,
-     'Camino a Nos 360', 739, 7, '920123003');
-  INSERT INTO empleado VALUES
-    (600028, 2002, '30100001-1', 'Claudio', 'Bodeguero', 6,
-     'Av. Vespucio 789', 705, 7, '921234001');
-  INSERT INTO empleado VALUES
-    (600029, 2002, '30100002-2', 'Verónica', 'Inventario', 7,
-     'Av. Vespucio 790', 705, 7, '921234002');
-  INSERT INTO empleado VALUES
-    (600030, 2002, '30100003-3', 'Esteban', 'Repartos', 8,
-     'Av. Vespucio 791', 705, 7, '921234003');
-END;
-/
+-- 11. LOTE STOCK (Fechas de vencimiento corregidas)
+INSERT INTO lote_stock VALUES (900000000000001,100001,1001,5,DATE '2026-01-10',DATE '2026-08-01');
+INSERT INTO lote_stock VALUES (900000000000002,100001,2001,250,DATE '2026-01-05',DATE '2027-01-15');
+INSERT INTO lote_stock VALUES (900000000000003,100002,1002,12,DATE '2026-02-15',DATE '2027-03-20');
+INSERT INTO lote_stock VALUES (900000000000004,100002,2002,150,DATE '2026-02-01',DATE '2027-09-10');
+INSERT INTO lote_stock VALUES (900000000000005,100003,1003,0,DATE '2026-03-01',DATE '2026-12-01');
+INSERT INTO lote_stock VALUES (900000000000006,100003,2001,180,DATE '2026-03-05',DATE '2027-06-01');
+INSERT INTO lote_stock VALUES (900000000000007,100004,1004,8,DATE '2026-03-10',DATE '2027-02-28');
+INSERT INTO lote_stock VALUES (900000000000008,100004,2002,200,DATE '2026-03-20',DATE '2027-08-31');
+INSERT INTO lote_stock VALUES (900000000000009,100005,1005,10,DATE '2026-04-05',DATE '2026-09-30');
+INSERT INTO lote_stock VALUES (900000000000010,100005,2001,120,DATE '2026-04-01',DATE '2027-04-30');
+INSERT INTO lote_stock VALUES (900000000000011,100006,1006,15,DATE '2026-05-01',DATE '2027-05-20');
+INSERT INTO lote_stock VALUES (900000000000012,100006,2002,90,DATE '2026-05-10',DATE '2027-12-15');
+INSERT INTO lote_stock VALUES (900000000000013,100007,1007,3,DATE '2026-06-01',DATE '2027-03-01');
+INSERT INTO lote_stock VALUES (900000000000014,100007,2001,200,DATE '2026-06-05',DATE '2027-09-01');
+INSERT INTO lote_stock VALUES (900000000000015,100008,1008,7,DATE '2026-06-15',DATE '2028-01-01');
+INSERT INTO lote_stock VALUES (900000000000016,100008,2002,300,DATE '2026-06-20',DATE '2028-06-01');
+INSERT INTO lote_stock VALUES (900000000000017,100009,1001,0,DATE '2026-07-01',DATE '2026-12-01');
+INSERT INTO lote_stock VALUES (900000000000018,100009,2001,180,DATE '2026-07-05',DATE '2027-04-30');
+INSERT INTO lote_stock VALUES (900000000000019,100010,1002,14,DATE '2026-07-10',DATE '2027-05-15');
+INSERT INTO lote_stock VALUES (900000000000020,100010,2002,220,DATE '2026-07-15',DATE '2027-11-30');
+INSERT INTO lote_stock VALUES (900000000000021,100011,1003,6,DATE '2026-08-01',DATE '2026-12-15');
+INSERT INTO lote_stock VALUES (900000000000022,100011,2001,160,DATE '2026-08-05',DATE '2027-06-30');
+INSERT INTO lote_stock VALUES (900000000000023,100012,1004,9,DATE '2026-08-10',DATE '2027-01-31');
+INSERT INTO lote_stock VALUES (900000000000024,100012,2002,190,DATE '2026-08-15',DATE '2027-07-31');
+INSERT INTO lote_stock VALUES (900000000000025,100013,1005,0,DATE '2026-09-01',DATE '2027-11-01');
+INSERT INTO lote_stock VALUES (900000000000026,100013,2001,220,DATE '2026-09-05',DATE '2027-05-20');
+INSERT INTO lote_stock VALUES (900000000000027,100014,1006,11,DATE '2026-09-10',DATE '2027-02-01');
+INSERT INTO lote_stock VALUES (900000000000028,100014,2002,200,DATE '2026-09-15',DATE '2027-08-01');
+INSERT INTO lote_stock VALUES (900000000000029,100015,1007,15,DATE '2026-10-01',DATE '2027-03-01');
+INSERT INTO lote_stock VALUES (900000000000030,100015,2001,180,DATE '2026-10-05',DATE '2027-09-01');
+INSERT INTO lote_stock VALUES (900000000000031,100016,1008,4,DATE '2026-10-10',DATE '2027-12-01');
+INSERT INTO lote_stock VALUES (900000000000032,100016,2002,210,DATE '2026-10-15',DATE '2027-06-01');
+INSERT INTO lote_stock VALUES (900000000000033,100017,1001,7,DATE '2026-11-01',DATE '2027-03-01');
+INSERT INTO lote_stock VALUES (900000000000034,100017,2001,200,DATE '2026-11-05',DATE '2027-09-01');
+INSERT INTO lote_stock VALUES (900000000000035,100018,1002,2,DATE '2026-11-10',DATE '2027-12-15');
+INSERT INTO lote_stock VALUES (900000000000036,100018,2002,150,DATE '2026-11-15',DATE '2027-07-15');
+INSERT INTO lote_stock VALUES (900000000000037,100019,1003,13,DATE '2026-12-01',DATE '2027-01-15');
+INSERT INTO lote_stock VALUES (900000000000038,100019,2001,180,DATE '2026-12-05',DATE '2027-08-15');
+INSERT INTO lote_stock VALUES (900000000000039,100020,1004,0,DATE '2026-12-10',DATE '2027-11-30');
+INSERT INTO lote_stock VALUES (900000000000040,100020,2002,200,DATE '2026-12-15',DATE '2027-12-31');
 
--- Clientes: 100 registros generados con RUT y teléfonos únicos.
-BEGIN
-  FOR i IN 1..100 LOOP
-    INSERT INTO cliente VALUES
-      (7000 + i,
-       '31' || LPAD(TO_CHAR(i), 6, '0') || '-' || TO_CHAR(MOD(i, 10)),
-       'Cliente' || i, 'FarmaCentral', 'Avenida Cliente ' || i,
-       700 + MOD(i - 1, 42) + 1, 7, '930' || LPAD(TO_CHAR(i), 6, '0'));
-  END LOOP;
-END;
-/
+-- 12. ESTADO ENVIO
+INSERT INTO estado_envio VALUES (1, 'Pendiente');
+INSERT INTO estado_envio VALUES (2, 'En Tránsito');
+INSERT INTO estado_envio VALUES (3, 'Finalizado');
 
--- Lotes de stock: 320 lotes en farmacias y 80 en bodegas.
--- Cada farmacia recibe los 40 medicamentos; aproximadamente una séptima
--- parte queda vencida y varias cantidades quedan bajo el umbral de 15.
-BEGIN
-  FOR s IN 1..8 LOOP
-    FOR m IN 1..40 LOOP
-      INSERT INTO lote_stock
-        (id_lote, id_medicamento, id_sucursal, cantidad,
-         fecha_ingreso, fecha_vencimiento)
-      VALUES
-        (900000000000000 + (s - 1) * 40 + m,
-         100000 + m, 1000 + s,
-         CASE WHEN MOD(s + m, 5) = 0 THEN MOD(s + m, 15)
-              ELSE 40 + MOD(s * m, 80) END,
-         DATE '2026-01-01' + MOD(s * m, 200),
-         CASE WHEN MOD(s + m, 7) = 0 THEN DATE '2026-08-31'
-              ELSE DATE '2027-01-01' + MOD(s * m, 500) END);
-    END LOOP;
-  END LOOP;
+-- 13. VENTA (Ventas agregadas con totales exactos a los subtotales)
+INSERT INTO venta VALUES (500001, 7001, 6003, 1001, DATE '2026-09-10', 2400);
+INSERT INTO venta VALUES (500002, 7002, 6006, 1002, DATE '2026-09-11', 3000);
+INSERT INTO venta VALUES (500003, 7003, 6009, 1003, DATE '2026-09-12', 5600);
+INSERT INTO venta VALUES (500004, 7004, 6012, 1004, DATE '2026-09-13', 3600);
+INSERT INTO venta VALUES (500005, 7005, 6015, 1005, DATE '2026-09-14', 7000);
+INSERT INTO venta VALUES (500006, 7006, 6018, 1006, DATE '2026-09-15', 8400);
 
-  FOR b IN 1..2 LOOP
-    FOR m IN 1..40 LOOP
-      INSERT INTO lote_stock
-        (id_lote, id_medicamento, id_sucursal, cantidad,
-         fecha_ingreso, fecha_vencimiento)
-      VALUES
-        (900000000000400 + (b - 1) * 40 + m,
-         100000 + m, 2000 + b, 200 + MOD(b * m, 100),
-         DATE '2026-01-01' + MOD(b * m, 100),
-         DATE '2028-01-01' + MOD(b * m, 300));
-    END LOOP;
-  END LOOP;
-END;
-/
+-- 14. DETALLE VENTA (Cantidad * Precio)
+INSERT INTO detalle_venta VALUES (500001, 900000000000001, 2, 2400); -- 2 x Paracetamol (1200)
+INSERT INTO detalle_venta VALUES (500002, 900000000000003, 2, 3000); -- 2 x Ibuprofeno (1500)
+INSERT INTO detalle_venta VALUES (500003, 900000000000007, 2, 3600); -- 2 x Naproxeno (1800)
+INSERT INTO detalle_venta VALUES (500003, 900000000000017, 1, 2000); -- 1 x Metamizol (2000)
+INSERT INTO detalle_venta VALUES (500004, 900000000000007, 2, 3600); -- 2 x Naproxeno (1800)
+INSERT INTO detalle_venta VALUES (500005, 900000000000009, 2, 7000); -- 2 x Amoxicilina (3500)
+INSERT INTO detalle_venta VALUES (500006, 900000000000011, 2, 8400); -- 2 x Ciprofloxacino (4200)
 
--- Estados y ventas.
-INSERT ALL
-  INTO estado_envio VALUES (1, 'Pendiente')
-  INTO estado_envio VALUES (2, 'En tránsito')
-  INTO estado_envio VALUES (3, 'Finalizado')
-SELECT 1 FROM dual;
+-- 15. ENVIO BODEGA
+INSERT INTO envio_bodega VALUES (800001, 2001, 1001, DATE '2026-09-15', 2);
+INSERT INTO envio_bodega VALUES (800002, 2002, 1002, DATE '2026-09-16', 3);
+INSERT INTO envio_bodega VALUES (800003, 2001, 1003, DATE '2026-09-17', 1);
 
-BEGIN
-  FOR i IN 1..100 LOOP
-    INSERT INTO venta
-      (id_venta, id_cliente, id_empleado, id_sucursal, fecha, total)
-    VALUES
-      (500000 + i, 7001 + MOD(i - 1, 100),
-       600000 + MOD(i - 1, 8) * 3 + 1,
-       1001 + MOD(i - 1, 8),
-       DATE '2026-01-01' + MOD(i * 3, 260),
-       1000 + MOD(i, 40) * 250);
+-- 16. DETALLE ENVIO
+INSERT INTO detalle_envio VALUES (800001, 900000000000002, 50, 'Reposición Paracetamol');
+INSERT INTO detalle_envio VALUES (800002, 900000000000004, 30, 'Reposición Ibuprofeno');
+INSERT INTO detalle_envio VALUES (800003, 900000000000006, 40, 'Reposición Aspirina');
 
-    INSERT INTO detalle_venta
-      (id_venta, id_lote, cantidad, subtotal)
-    VALUES
-      (500000 + i,
-       900000000000000 + MOD(i - 1, 8) * 40 + MOD(i - 1, 40) + 1,
-       1 + MOD(i, 3),
-       1000 + MOD(i, 40) * 250);
-  END LOOP;
-END;
-/
-
--- Envíos desde las bodegas hacia las farmacias.
-BEGIN
-  FOR i IN 1..40 LOOP
-    INSERT INTO envio_bodega
-      (id_envio, id_sucursal_origen, id_sucursal_destino,
-       fecha_envio, id_estado)
-    VALUES
-      (800000 + i, 2001 + MOD(i - 1, 2), 1001 + MOD(i - 1, 8),
-       DATE '2026-02-01' + i, MOD(i - 1, 3) + 1);
-
-    INSERT INTO detalle_envio
-      (id_envio, id_lote, cantidad, observacion)
-    VALUES
-      (800000 + i,
-       900000000000400 + MOD(i - 1, 2) * 40 + MOD(i - 1, 40) + 1,
-       10 + MOD(i, 40), 'Reposición de inventario');
-  END LOOP;
-END;
-/
-
--- Alertas iniciales: se incluyen algunas de ejemplo para que la tabla no
--- quede vacía antes de ejecutar el bloque de control de inventario.
-BEGIN
-  FOR i IN 1..40 LOOP
-    INSERT INTO alerta_inventario
-      (id_alerta, id_sucursal, mensaje, fecha_registro)
-    VALUES
-      (100000000000000 + i, 1001 + MOD(i - 1, 8),
-       CASE WHEN MOD(i, 2) = 0 THEN 'Stock crítico de medicamento'
-            ELSE 'Lote próximo a vencer' END,
-       DATE '2026-09-01' + MOD(i, 17));
-  END LOOP;
-END;
-/
+-- 17. ALERTA INVENTARIO (Generadas para los lotes en 0 o stock bajo)
+INSERT INTO alerta_inventario VALUES (1001, 1003, 'Stock crítico: Lote 900000000000005 sin existencias.', DATE '2026-09-15');
+INSERT INTO alerta_inventario VALUES (1002, 1001, 'Stock crítico: Lote 900000000000017 sin existencias.', DATE '2026-09-15');
+INSERT INTO alerta_inventario VALUES (1003, 1005, 'Stock crítico: Lote 900000000000025 sin existencias.', DATE '2026-09-16');
 
 COMMIT;
-
--- Consultas rápidas de comprobación:
--- SELECT COUNT(*) FROM sucursal WHERE id_tipo = 1;
--- SELECT COUNT(*) FROM lote_stock;
--- SELECT id_sucursal, COUNT(*) FROM lote_stock GROUP BY id_sucursal ORDER BY id_sucursal;
--- SELECT COUNT(*) FROM cliente;
--- SELECT COUNT(*) FROM venta;
--- SELECT COUNT(*) FROM envio_bodega;
