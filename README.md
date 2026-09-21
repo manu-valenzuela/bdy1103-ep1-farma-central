@@ -20,7 +20,8 @@ bdy1103-ep1-farma-central/
 │   └── 04_inventario.sql             : Contiene los bloque de código PL/SQL para compra, venta y control de inventario.
 └── documentacion/
     ├── 05_MER.pdf                    : Modelo Entidad-Relación de la base de datos. Desarrollado en Data Modeler.
-    └── 06_presentacion.pptx          : Diapositivas para acompañar la presentación de este código.
+    ├── 06_presentacion.pdf           : Diapositivas para acompañar la presentación de este código.
+    └── 07_presentacion.docx          : Apuntes que comentan el proyecto según los requisitos de evaluación.
 ````
 ## INSTRUCCIONES
   1. Abrir SQLPlus, iniciar como `/as sysdba`, pegar el contenido de 01_nuevo_usuario.sql y crear el usuario.
